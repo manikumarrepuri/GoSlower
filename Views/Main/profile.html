@@ -1,0 +1,96 @@
+<style>
+    .content{
+    margin: 0 0 0 10px;
+    min-width: 300px;
+}
+.nav-tabs{
+    background-color: #fff;
+    color:#ddd;
+    width:inline;
+    border-radius: 10px;
+}
+.nav-tabs > li > a{
+    color:Gray;
+}
+.nav-tabs > li > a:hover,
+.nav-tabs > li > a:focus {
+    border-color: #F1C40F #F1C40F #F1C40F #F1C40F;
+    border-radius: 10px;
+}
+
+.nav-tabs .active > a,
+.nav-tabs .active > a:hover,
+.nav-tabs .active > a:focus {
+    border-color: #F1C40F transparent #F1C40F #F1C40F;
+    *border-right-color: #F1C40F;
+    background-color: #F1C40F;
+    border-radius: 10px;
+}
+.form-horizontal{
+    margin: 50px 0;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+    color: #fff;
+    background-color: #F1C40F;
+    border: 1px solid #F1C40F;
+    border-bottom-color: transparent;
+    cursor: default;
+}
+.nextButton, .prevButton {
+    width:120px;
+    text-align: center;
+}
+.nextButton:hover, .prevButton:hover {
+    color: black;
+    font-weight: bold;
+}
+</style>
+<!--<div class="content" ng-controller="TestController">-->
+
+<form class="form-horizontal">
+  <ul class="nav nav-tabs">
+    <li ng-repeat="step in steps" ng-class="{active: $index==getCurrentStepIndex()}">
+      <a href="javascript:void(0)" ng-click="goToStep($index)">{{step}}</a>
+    </li>
+  </ul>
+  <div ng-switch on="selection">
+
+    <!-- First Step -->
+    <div ng-switch-when="Personal Info">
+      <h1>Step 1</h1>
+    </div>
+
+    <!-- Second Step -->
+    <div ng-switch-when="Communication">
+        <h1>Step 2</h1>
+    </div>
+
+    <!-- Third Step -->
+    <div ng-switch-when="About You">
+        <h1>Step 3</h1>
+    </div>
+
+    <!-- Third Step -->
+    <div ng-switch-when="Verification">
+        <h1>Step 4</h1>
+    </div>
+
+    <!-- Third Step -->
+    <div ng-switch-when="Documents">
+        <h1>Step 5</h1>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <ul class="pager pull-left">
+    <li class="" ng-class="{disabled: !hasPreviousStep()}">
+      <a class="prevButton" style="border-radius:10px" href="javascript:void(0);" ng-click="decrementStep()">&larr; Previous</a>
+    </li>
+    <li class="" ng-class="{disabled: !hasNextStep()}">
+      <a class="nextButton" style="border-radius:10px" href="javascript:void(0);" ng-click="incrementStep()">Next &rarr;</a>
+    </li>
+  </ul>
+  <div class="pull-right"><button style="margin:20px 0;border-radius:10px" class="btn btn-success">Save</button></div>
+  <div class="clearfix"></div>
+</form>
+
+  <!--</div>-->
