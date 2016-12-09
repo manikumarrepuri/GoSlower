@@ -1,5 +1,5 @@
 main.controller("BecomeCarrierController", function ($scope, $http, $rootScope, $location, Upload, $timeout) {
-
+$scope.carrierList=[]
 $scope.personal =[];
 $scope.communication =[];
 $scope.aboutyou =[];
@@ -8,69 +8,7 @@ $scope.verification =[];
 $scope.documents =[];
 $scope.isSubmitDisabled=true;
 //Below flag is used to display the mandatory error tooltip on top of the page
-$scope.errorList=[];
-$scope.formValidationList=[];
-$scope.isMandatoryFields =true;
-$scope.steps = [
-    'personal',
-    'communication',
-    'aboutyou',
-    'profession',
-    'verification',
-    'documents'
-  ];
-  $scope.selection = $scope.steps[0];
 
-  $scope.getCurrentStepIndex = function(){
-    // Get the index of the current step given selection
-    return _.indexOf($scope.steps, $scope.selection);
-  };
-
-  // Go to a defined step index
-//   $scope.goToStep = function(index) {
-//     if ( !_.isUndefined($scope.steps[index]) )
-//     {
-//       $scope.selection = $scope.steps[index];
-//     }
-//   };
-$scope.goToStep = function(value) {
-    if ( !_.isUndefined($scope.steps(value)) )
-    {
-      $scope.selection = $scope.steps(value);
-    }
-  };
-
-  $scope.hasNextStep = function(){
-    var stepIndex = $scope.getCurrentStepIndex();
-    var nextStep = stepIndex + 1;
-    // Return true if there is a next step, false if not
-    return !_.isUndefined($scope.steps[nextStep]);
-  };
-
-  $scope.hasPreviousStep = function(){
-    var stepIndex = $scope.getCurrentStepIndex();
-    var previousStep = stepIndex - 1;
-    // Return true if there is a next step, false if not
-    return !_.isUndefined($scope.steps[previousStep]);
-  };
-
-  $scope.incrementStep = function() {
-    if ( $scope.hasNextStep() )
-    {
-      var stepIndex = $scope.getCurrentStepIndex();
-      var nextStep = stepIndex + 1;
-      $scope.selection = $scope.steps[nextStep];
-    }
-  };
-
-  $scope.decrementStep = function() {
-    if ( $scope.hasPreviousStep() )
-    {
-      var stepIndex = $scope.getCurrentStepIndex();
-      var previousStep = stepIndex - 1;
-      $scope.selection = $scope.steps[previousStep];
-    }
-  };
   
 
  
@@ -596,4 +534,28 @@ $scope.mandatoryCheckFunction = function(value){
 $(function(){
 $('a[title]').tooltip();
 });
+$scope.savePersonal = function(){
+		$http.post('/carrierSave', {identity:$scope.personal.identity}, {homeAddress:$scope.personal.homeaddress}).
+        success(function(data)
+        {
+			if(data == 'success'){
+				alert('data saved successfully');  
+			}
+			else{
+				alert('Some issue while saving the data');  
+			}
+		});
+    };
+$scope.getPersonal = function(){
+		$http.post('/carrierGet', {username:"mani kumar"}).
+        success(function(data)
+        {
+			if(data == 'success'){
+				alert('data saved successfully');  
+			}
+			else{
+				alert('Some issue while saving the data');  
+			}
+		});
+    };
 });

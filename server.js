@@ -11,6 +11,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var session = require('express-session');
 var mongoose = require('mongoose');
 var models_user = require('./Angular/Models/user.js');
+var models_carrier = require('./Angular/Models/carrier.js');
 var x2js = require('x2js');
 //connection database
 mongoose.connect('mongodb://localhost/sharedeconomy');
